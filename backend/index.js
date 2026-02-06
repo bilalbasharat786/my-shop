@@ -10,6 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+// --- YE NAYI LINE ADD KARO ---
+// Iska matlab: Agar koi URL '/uploads' se shuru ho, to use 'uploads' folder mein dhoondo
+app.use('/uploads', express.static('uploads'));
 // Database Connection
 mongoose.connect("mongodb://127.0.0.1:27017/myshop")
     .then(() => console.log("MongoDB Connected Successfully!"))
