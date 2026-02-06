@@ -1,6 +1,7 @@
 // frontend/src/components/Home.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -52,9 +53,12 @@ const Home = () => {
                 <span className="text-lg font-bold text-blue-600">
                   {product.price}
                 </span>
-                <button className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">
-                  Buy Now
-                </button>
+                <Link 
+                  to={`/product/${product._id}`} 
+                  className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition"
+                >
+                  View Details
+                </Link>
               </div>
             </div>
 

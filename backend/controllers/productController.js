@@ -35,3 +35,16 @@ export const getProducts = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+export const getProductById = async (req, res) => {
+    try {
+        // URL se ID uthayega aur database mein dhoondega
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+        res.send(product);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};

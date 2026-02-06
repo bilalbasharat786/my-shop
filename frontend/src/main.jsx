@@ -1,10 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+// frontend/src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import './index.css'
+import { BrowserRouter } from 'react-router-dom' // Ye import karo
+import { CartProvider } from './context/CartContext.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <CartProvider> {/* Cart Context provider se app ko wrap kar do */}
+    <BrowserRouter>  {/* App ko iske andar band kar do */}
+      <App />
+    </BrowserRouter>
+    </CartProvider>
+  </React.StrictMode>,
 )
