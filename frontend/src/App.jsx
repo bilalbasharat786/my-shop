@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import ProductDetail from "./components/ProductDetail";
 import { useCart } from "./context/CartContext"; // Cart hook import kiya
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
   const { cart } = useCart(); // Cart ka data nikala
@@ -35,6 +36,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         {/* Cart page ka route hum baad mein banayenge */}
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       
     </div>

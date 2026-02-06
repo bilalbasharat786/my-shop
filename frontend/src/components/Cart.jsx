@@ -65,9 +65,9 @@ const Cart = () => {
 
       {/* Checkout Button */}
       <div className="mt-6 text-right">
-        <button className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-green-700 transition">
-          Proceed to Checkout
-        </button>
+        <Link to="/checkout" className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-green-700 transition inline-block">
+  Proceed to Checkout
+</Link>
       </div>
 
     </div>
