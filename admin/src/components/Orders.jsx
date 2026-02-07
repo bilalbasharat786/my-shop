@@ -1,7 +1,6 @@
 // admin/src/components/Orders.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../url";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
