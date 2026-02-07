@@ -1,19 +1,27 @@
 // server/middleware/upload.js
-import multer from 'multer';
-import path from 'path';
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import dotenv from "dotenv";
 
-// Storage setting: Kahan save karna hai aur file ka naam kya hoga
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // 'uploads' folder mein save karo
-  },
-  filename: function (req, file, cb) {
-    // File ka naam unique banane ke liye current time add kar rahe hain
-    cb(null, Date.now() + path.extname(file.originalname)); 
-  }
+dotenv.config();
+
+// Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Upload middleware create karna
+// Storage Setup
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "ecommerce_products", // Cloudinary par folder ka naam
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+  },
+});
+
 const upload = multer({ storage: storage });
 
 export default upload;

@@ -12,7 +12,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/product/${id}`);
+        const response = await axios.get(`${baseUrl}/api/product/${id}`);
         setProduct(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -34,7 +34,7 @@ const ProductDetail = () => {
         {/* Left Side: Image */}
         <div className="md:w-1/2">
           <img 
-            src={`http://localhost:5000/${product.imageUrl}`} 
+            src={product.imageUrl} 
             alt={product.name} 
             className="w-full h-96 object-cover"
           />

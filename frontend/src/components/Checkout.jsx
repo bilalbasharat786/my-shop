@@ -43,7 +43,7 @@ const Checkout = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/orders", orderData);
+      const response = await axios.post(`${baseUrl}/api/orders`, orderData);
       if (response.status === 201) {
         alert("Order Placed Successfully!");
         clearCart(); // Cart khali karo

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../url";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         // Backend GET API call
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get(`${baseUrl}/api/products`);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -35,7 +36,7 @@ const Home = () => {
             
            {/* Server ka address image path se pehle lagana zaroori hai */}
 <img 
-  src={`http://localhost:5000/${product.imageUrl}`} 
+  src={product.imageUrl} 
   alt={product.name} 
   className="w-full h-48 object-cover"
 />
