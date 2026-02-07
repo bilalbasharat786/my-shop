@@ -6,13 +6,14 @@ import { useAuth } from "../context/AuthContext"; // Login user ka data lene ke 
 const MyOrders = () => {
   const { user } = useAuth(); // Logged in user nikala
   const [orders, setOrders] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Orders lanay ka function
   const fetchOrders = async () => {
     if (!user?.email) return; // Agar user login nahi hai to ruk jao
 
     try {
-      const response = await axios.post(`${baseUrl}/api/my-orders`, { 
+      const response = await axios.post(`${backendUrl}/api/my-orders`, { 
         email: user.email 
       });
       setOrders(response.data);
@@ -40,7 +41,7 @@ const MyOrders = () => {
     if(!window.confirm("Are you sure you want to cancel this order?")) return;
 
     try {
-      await axios.delete(`${baseUrl}/api/order/cancel/${id}`);
+      await axios.delete(`${backendUrl}/api/order/cancel/${id}`);
       alert("Order Cancelled!");
       fetchOrders(); // List foran update karo
     } catch (error) {

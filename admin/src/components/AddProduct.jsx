@@ -2,6 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 
+
 const AddProduct = () => {
   // Text fields ke liye state
   const [textData, setTextData] = useState({
@@ -35,7 +36,7 @@ const AddProduct = () => {
 
     try {
       // Axios khud hi samajh jayega ke ye multipart/form-data hai
-      const response = await axios.post(`${baseUrl}/api/add-product`, formData);
+      const response = await axios.post(`${backendUrl}/api/add-product`, formData);
       if (response.data) {
         alert("Product Successfully Added!");
         // Form reset

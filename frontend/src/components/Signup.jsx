@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${baseUrl}/api/auth/register`, formData);
+      await axios.post(`${backendUrl}/api/auth/register`, formData);
       alert("Registration Successful! Please Login.");
       navigate("/login");
     } catch (error) {

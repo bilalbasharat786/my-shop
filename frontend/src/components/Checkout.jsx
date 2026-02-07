@@ -41,9 +41,10 @@ const Checkout = () => {
       })),
       totalPrice: totalPrice
     };
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     try {
-      const response = await axios.post(`${baseUrl}/api/orders`, orderData);
+      const response = await axios.post(`${backendUrl}/api/orders`, orderData);
       if (response.status === 201) {
         alert("Order Placed Successfully!");
         clearCart(); // Cart khali karo

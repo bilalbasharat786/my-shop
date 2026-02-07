@@ -8,11 +8,12 @@ const ProductDetail = () => {
   const { id } = useParams(); // URL se ID nikalne ke liye
   const [product, setProduct] = useState(null);
   const { addToCart } = useCart();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/product/${id}`);
+        const response = await axios.get(`${backendUrl}/api/product/${id}`);
         setProduct(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);

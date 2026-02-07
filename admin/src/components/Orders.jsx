@@ -5,6 +5,7 @@ import { baseUrl } from "../url";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Orders load karna
   useEffect(() => {
@@ -13,7 +14,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/orders`);
+      const response = await axios.get(`${backendUrl}/api/orders`);
       setOrders(response.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -23,7 +24,7 @@ const Orders = () => {
   // Status Change Handle karna
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`${baseUrl}/api/order/${id}`, { status: newStatus });
+      await axios.put(`${backendUrl}/api/order/${id}`, { status: newStatus });
       fetchOrders(); // List refresh karo taake naya status dikhe
     } catch (error) {
       console.error("Status update failed:", error);
@@ -34,7 +35,7 @@ const Orders = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this order?")) {
       try {
-        await axios.delete(`${baseUrl}/api/order/${id}`);
+        await axios.delete(`${backendUrl}/api/order/${id}`);
         fetchOrders(); // List refresh karo
       } catch (error) {
         console.error("Delete failed:", error);
@@ -88,7 +89,7 @@ const Orders = () => {
               {order.products.map((item, index) => (
                 <li key={index} className="flex items-center gap-4 bg-gray-50 p-2 rounded">
                    <img 
-                    src={`${baseUrl}${item.imageUrl}`} 
+                    src={`${backendUrl}${item.imageUrl}`} 
                     alt={item.name} 
                     className="w-10 h-10 object-cover rounded border"
                   />

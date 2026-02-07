@@ -8,11 +8,12 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { login } = useAuth();
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${baseUrl}/api/auth/login`, formData);
+      const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
       login(res.data.user, res.data.token); // Context update karo
       alert("Login Successful!");
       navigate("/"); // Home page par bhej do

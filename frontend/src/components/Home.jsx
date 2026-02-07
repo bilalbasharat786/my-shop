@@ -6,13 +6,14 @@ import { baseUrl } from "../url";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // Page load hote hi API se products mangwao
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         // Backend GET API call
-        const response = await axios.get(`${baseUrl}/api/products`);
+        const response = await axios.get(`${backendUrl}/api/products`);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
