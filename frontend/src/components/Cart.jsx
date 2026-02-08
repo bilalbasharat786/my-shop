@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart } = useCart();
+  
 
   // Total Price calculate karne ka formula
   const totalPrice = cart.reduce((total, item) => {
@@ -34,7 +35,7 @@ const Cart = () => {
             {/* Image & Name */}
             <div className="flex items-center gap-4">
               <img 
-                src={product.imageUrl}
+                src={item.imageUrl}
                 alt={item.name} 
                 className="w-16 h-16 object-cover rounded-md" 
               />
