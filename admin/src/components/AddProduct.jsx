@@ -4,6 +4,8 @@ import axios from "axios";
 
 
 const AddProduct = () => {
+
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   // Text fields ke liye state
   const [textData, setTextData] = useState({
     name: "",

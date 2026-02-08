@@ -4,6 +4,7 @@ import AddProduct from "./components/AddProduct";
 import Orders from "./components/Orders"; // <-- Import Orders
 
 
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
