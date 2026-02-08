@@ -24,9 +24,10 @@ const Orders = () => {
   const handleStatusChange = async (id, newStatus) => {
     try {
       await axios.put(`${backendUrl}/api/order/${id}`, { status: newStatus });
-      fetchOrders(); // List refresh karo taake naya status dikhe
+      fetchOrders(); // List refresh karo
     } catch (error) {
       console.error("Status update failed:", error);
+      alert("Status Update Failed!"); // Alert add kiya taake pata chale agar fail ho
     }
   };
 
@@ -35,7 +36,7 @@ const Orders = () => {
     if (window.confirm("Are you sure you want to delete this order?")) {
       try {
         await axios.delete(`${backendUrl}/api/order/${id}`);
-        fetchOrders(); // List refresh karo
+        fetchOrders();
       } catch (error) {
         console.error("Delete failed:", error);
       }
@@ -50,7 +51,7 @@ const Orders = () => {
         {orders.map((order) => (
           <div key={order._id} className="bg-white border border-gray-200 shadow-md rounded-lg p-6 relative">
             
-            {/* Delete Button (Top Right) */}
+            {/* Delete Button */}
             <button 
               onClick={() => handleDelete(order._id)}
               className="absolute top-4 right-4 text-red-500 hover:text-red-700 font-bold"
@@ -83,12 +84,12 @@ const Orders = () => {
               </div>
             </div>
 
-            {/* Products List (Image ke sath) */}
+            {/* Products List - YAHAN CHANGE KIYA HAI */}
             <ul className="space-y-2 border-t pt-4">
               {order.products.map((item, index) => (
                 <li key={index} className="flex items-center gap-4 bg-gray-50 p-2 rounded">
                    <img 
-                    src={`${backendUrl}${item.imageUrl}`} 
+                    src={item.imageUrl}  // <-- SIRF item.imageUrl REHNE DO
                     alt={item.name} 
                     className="w-10 h-10 object-cover rounded border"
                   />
