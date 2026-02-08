@@ -2,13 +2,15 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import productRoutes from "./routes/productRoutes.js"; // Routes import kiye
-import orderRoutes from "./routes/orderRoutes.js"; // <-- Ye Import kiya
-import authRoutes from "./routes/authRoutes.js";
-import path from "path";
 import dotenv from "dotenv";
-dotenv.config(); // <-- Ye sabse upar hona chahiy
+import path from "path";
 
+// Routes Import
+import productRoutes from "./routes/productRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import authRoutes from "./routes/authRoutes.js"; 
+
+dotenv.config();
 
 const app = express();
 
@@ -16,23 +18,24 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-// --- YE NAYI LINE ADD KARO ---
-// Iska matlab: Agar koi URL '/uploads' se shuru ho, to use 'uploads' folder mein dhoondo
-app.use('/uploads', express.static('uploads'));
 // Database Connection
-mongoose.connect(process.env.MONGO_URI) // <-- Ab ye .env se ayega
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Atlas Connected!"))
     .catch((err) => console.log("DB Error:", err));
 
-// Routes Use karna
-// Iska matlab: koi bhi URL jo "/api" se shuru hoga, wo productRoutes ma jayega
+// --- API ROUTES ---
 app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes); // Note: Maine yahan /auth add kiya hai jaisa humne pehle fix kiya tha
 
-// Server Start
-const PORT = 5000;
+// --- YE HAI WO MISSING CODE (ROOT ROUTE) ---
+// Jab koi tumhari website ka main link kholega to ye message ayega
+app.get("/", (req, res) => {
+    res.send("Server is Running! 🚀 Welcome to My E-Shop Backend");
+});
+
+// Server Start (Vercel ke liye Port dynamic hona chahiye)
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
